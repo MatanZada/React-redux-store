@@ -35,7 +35,7 @@ function ManageCoursePage({
         alert("Loading authors failed" + error);
       });
     }
-  }, [props.course]);
+  }, [authors.length, courses.length, loadAuthors, loadCourses, props.course]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -102,7 +102,7 @@ export function getCourseBySlug(courses, slug) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const slug = ownProps.match.params.slug;
+  const slug = ownProps.match.params.slug || ownProps.match.params.CourseForm;
   const course =
     slug && state.courses.length > 0
       ? getCourseBySlug(state.courses, slug)
